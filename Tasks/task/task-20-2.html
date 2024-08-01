@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Enter your details</h1>
+    <label for="name">Name:</label>
+    <input type="text" id="name"><br>
+    <label for="age">Age:</label>
+    <input type="text" id="age"><br>
+    <label for="city">City:</label>
+    <input type="text" id="city"><br>
+    <button onclick="getUserData(displayData)">Submit</button>
+
+    <h2>Your Details</h2>
+    <p id="output"></p>
+
+    <script>
+        function getUserData(callback) {
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const city = document.getElementById('city').value;
+            callback(name, age, city);
+        }
+
+        function displayData(name, age, city) {
+            const output = `Name: ${name}<br>Age: ${age}<br>City: ${city}`;
+            document.getElementById('output').innerHTML = output;
+        }
+    </script>
+</body>
+</html>

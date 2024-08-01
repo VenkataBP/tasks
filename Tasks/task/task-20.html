@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+            color: darkolivegreen;
+        }
+        #movies {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 300px;
+            padding: 15px;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .card h2 {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .card p {
+            font-size: 1em;
+            color: #555;
+            margin: 5px 0;
+        }
+        .card .actors,
+        .card .country,
+        .card .awards {
+            font-size: 0.9em;
+            color: #333;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Getting API Request</h1>
+    <div id="movies">Loading movies...</div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        let api = "https://freetestapi.com/api/v1/movies";
+        let moviesContainer = document.getElementById("movies");
+
+        axios.get(api)
+        .then(function (res) {
+            let movies = res.data;
+            if (movies.length === 0) {
+                moviesContainer.innerHTML = "<p>No movies available</p>";
+            } else {
+                moviesContainer.innerHTML = ""; // Clear the loading text
+                movies.forEach(movie => {
+                    let card = document.createElement("div");
+                    card.className = "card";
+                    
+                    let title = document.createElement("h2");
+                    title.textContent = movie.title;
+                    card.appendChild(title);
+
+                    let id = document.createElement("p");
+                    id.textContent = `ID: ${movie.id}`;
+                    card.appendChild(id);
+
+                    let year = document.createElement("p");
+                    year.textContent = `Year: ${movie.year}`;
+                    card.appendChild(year);
+
+                    let actors = document.createElement("p");
+                    actors.className = "actors";
+                    actors.textContent = `Actors: ${movie.actors.join(', ')}`;
+                    card.appendChild(actors);
+
+                    let country = document.createElement("p");
+                    country.className = "country";
+                    country.textContent = `Country: ${movie.country}`;
+                    card.appendChild(country);
+
+                    let awards = document.createElement("p");
+                    awards.className = "awards";
+                    awards.textContent = `Awards: ${movie.awards}`;
+                    card.appendChild(awards);
+
+                    moviesContainer.appendChild(card);
+                });
+            }
+        })
+        .catch(function (err) {
+            console.log(err);
+            moviesContainer.innerHTML = "<p>Failed to load movies. Please try again later.</p>";
+        });
+    </script>
+</body>
+</html>

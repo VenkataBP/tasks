@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Username, Email, Contact Number, and Designation Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .message {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        input[type="text"], input[type="email"], input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0px 0px 5px blue;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+           
+    
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        h2{
+            color: rgb(59, 135, 59);
+        }
+        label{
+            color: rgb(91, 33, 12);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Validation Form</h2>
+        <form id="validationForm">
+            <label for="username">Enter Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="email">Enter Email:</label>
+            <input type="text" id="email" name="email" required>
+            <label for="contact">Enter Contact Number:</label>
+            <input type="text" id="contact" name="contact" required>
+            <label for="designation">Enter Designation:</label>
+            <input type="text" id="designation" name="designation" required>
+            <label for="file">Select multiple file</label>
+            <input type="file" id="file" name="file" required>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="usernameMessage" class="message"></div>
+        <div id="emailMessage" class="message"></div>
+        <div id="contactMessage" class="message"></div>
+        <div id="designationMessage" class="message"></div>
+    </div>
+
+    <script>
+        document.getElementById('validationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            validateForm();
+        });
+
+        function validateForm() {
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const contact = document.getElementById('contact').value;
+            const designation = document.getElementById('designation').value;
+
+            const usernameMessage = document.getElementById('usernameMessage');
+            const emailMessage = document.getElementById('emailMessage');
+            const contactMessage = document.getElementById('contactMessage');
+            const designationMessage = document.getElementById('designationMessage');
+
+            const usernameRegex = /^[a-zA-Z][a-zA-Z0-9._]{2,15}$/;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const contactRegex = /^[0-9]{10}$/;
+            const designationRegex = /^[a-zA-Z\s]{3,50}$/;
+            if (usernameRegex.test(username)) {
+                usernameMessage.style.color = 'green';
+                usernameMessage.textContent = 'Username is valid.';
+            } else {
+                usernameMessage.style.color = 'red';
+                usernameMessage.textContent = 'Username is invalid. It must start with a letter and be between 3 and 16 characters long. It can only contain letters, numbers, underscores, or dots.';
+            }
+
+            if (emailRegex.test(email)) {
+                emailMessage.style.color = 'green';
+                emailMessage.textContent = 'Email is valid.';
+            } else {
+                emailMessage.style.color = 'red';
+                emailMessage.textContent = 'Email is invalid. Please enter a valid email address.';
+            }
+            if (contactRegex.test(contact)) {
+                contactMessage.style.color = 'green';
+                contactMessage.textContent = 'Contact number is valid.';
+            } else {
+                contactMessage.style.color = 'red';
+                contactMessage.textContent = 'Contact number is invalid. It must be a 10-digit number.';
+            }
+
+  
+            if (designationRegex.test(designation)) {
+                designationMessage.style.color = 'green';
+                designationMessage.textContent = 'Designation is valid.';
+            } else {
+                designationMessage.style.color = 'red';
+                designationMessage.textContent = 'Designation is invalid. It must be between 3 and 50 characters long and can only contain letters and spaces.';
+            }
+        }
+    </script>
+</body>
+</html>

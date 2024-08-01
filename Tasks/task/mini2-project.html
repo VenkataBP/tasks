@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoreboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #0b73e2;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-top: 0;
+}
+
+form {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    width: 250px;
+    height: 33px;
+}
+
+button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    background: #28a745;
+    color: white;
+    border-radius: 30px;
+    width: 100px;
+    cursor: pointer;
+  
+}
+
+button:hover {
+    background: #218838;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+li button {
+    background: #dc3545;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+li button:hover {
+    background: #c82333;
+}
+
+.score {
+    display: flex;
+    align-items: center;
+}
+
+.score button {
+    background: #007bff;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 0 5px;
+}
+
+.score button:hover {
+    background: #0056b3;
+}
+
+</style>
+<body>
+    <div class="container">
+        <h1 style="color:darkgrey">Scoreboard</h1>
+        <form id="player-form">
+            <input type="text" id="player-input" placeholder="Add a name player" required>
+            <button type="submit">Add Player</button>
+        </form>
+        <ul id="scoreboard"></ul>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const playerForm = document.getElementById('player-form');
+        const playerInput = document.getElementById('player-input');
+        const scoreboard = document.getElementById('scoreboard');
+
+        playerForm.addEventListener('submit', addPlayer);
+
+    function addPlayer(event) {
+        event.preventDefault();
+        const playerName = playerInput.value.trim();
+
+        if (playerName !== '') {
+            const listItem = document.createElement('li');
+            listItem.classList.add('player');
+
+            const playerNameSpan = document.createElement('span');
+            playerNameSpan.textContent = playerName;
+
+            const scoreContainer = document.createElement('div');
+            scoreContainer.classList.add('score');
+
+            const decrementButton = document.createElement('button');
+            decrementButton.textContent = '-';
+            decrementButton.addEventListener('click', () => {
+                let score = parseInt(scoreSpan.textContent);
+                scoreSpan.textContent = --score;
+            });
+
+            const scoreSpan = document.createElement('span');
+            scoreSpan.textContent = '0';
+
+            const incrementButton = document.createElement('button');
+            incrementButton.textContent = '+';
+            incrementButton.addEventListener('click', () => {
+                let score = parseInt(scoreSpan.textContent);
+                scoreSpan.textContent = ++score;
+            });
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Remove';
+            deleteButton.addEventListener('click', () => {
+                scoreboard.removeChild(listItem);
+            });
+
+            scoreContainer.appendChild(decrementButton);
+            scoreContainer.appendChild(scoreSpan);
+            scoreContainer.appendChild(incrementButton);
+
+            listItem.appendChild(playerNameSpan);
+            listItem.appendChild(scoreContainer);
+            listItem.appendChild(deleteButton);
+
+            scoreboard.appendChild(listItem);
+
+            playerInput.value = '';
+        }
+    }
+});
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+.main{
+    display:flex;
+}
+
+.img1 {
+    width: 400px;
+    height: 400px;
+    background-image: url(https://kasmweb.com/docs/latest/_images/background10.jpg);
+    background-repeat:no-repeat;
+    border-radius: 20px;
+    
+}
+
+.img2 {
+    width: 400px;
+    height: 400px;
+    background-image: url(	https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGIcXWLyr2msrkeWlTRKf-XS9-ox0RmUn5jg&usqp=CAU);
+    background-repeat: no-repeat;
+    margin-left: 2%;
+    border-radius: 20px;
+
+    }
+
+.img3 {
+    width: 400px;
+    height: 400px;
+    background-image: url(https://kasmweb.com/docs/latest/_images/background6.jpg);
+    background-repeat: no-repeat;
+    margin-left: 2%;
+    border-radius: 20px;
+}
+
+ h4 {
+    text-align: center;
+    position: absolute;
+    margin-top: 22%;
+    margin-left:10%;
+    color:blue;
+    cursor: pointer;
+
+}
+
+button {
+    margin-left: 10%;
+    margin-top:19%;
+    position: absolute;
+    cursor: pointer;
+    width: 100px;
+    height: 30px;
+}
